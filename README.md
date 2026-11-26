@@ -43,6 +43,15 @@ docker run -p 8080:80 stt-frontend
 
 The app is served by nginx at http://localhost:8080
 
+## Deploying to Render (Static Site)
+
+1. On https://render.com click New > Static Site and connect the repo.
+2. Root Directory: `frontend`, Build Command: `npm ci && npm run build`, Publish Directory: `dist`
+3. Add `VITE_API_URL` and `VITE_WS_URL` pointing to the deployed backend (`https://...` and `wss://.../ws/transcribe`).
+4. Under Redirects/Rewrites add a rule: Source `/*`, Destination `/index.html`, Action Rewrite. This makes refreshing `/dashboard` work.
+
+Environment variables are baked in at build time, so redeploy after changing them.
+
 ## Structure
 
 ```
